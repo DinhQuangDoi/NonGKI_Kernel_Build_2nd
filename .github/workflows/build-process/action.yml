@@ -74,6 +74,15 @@ runs:
             else
               make O=out ARCH="${{ env.KERNEL_ARCH }}" olddefconfig
             fi
+
+            echo "[CHK] --- MODULE_SIG status after .config generation ---"
+            grep -nE "CONFIG_MODULES=|CONFIG_MODULE_SIG=|CONFIG_MODULE_SIG_FORCE=|CONFIG_MODULE_SIG_ALL=|CONFIG_MODULE_UNLOAD=" out/.config
+            if grep -qE "^CONFIG_MODULE_SIG=y" out/.config; then
+              echo "[CHK] [ERROR] CONFIG_MODULE_SIG is still ENABLED (y)!"
+              false
+            else
+              echo "[CHK] [OK] CONFIG_MODULE_SIG is DISABLED."
+            fi
           fi
 
           if [[ "${{ env.BUILD_OTHER_CONFIG }}"  == "true" ]]; then
