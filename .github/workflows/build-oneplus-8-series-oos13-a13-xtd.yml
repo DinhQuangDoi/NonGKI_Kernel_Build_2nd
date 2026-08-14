@@ -78,6 +78,7 @@ env:
   BASEBAND_GUARD_ENABLE: "true" #if u want prevent unauthorized writes to critical partitions/device nodes.
   BASEBAND_GUARD_BOOT: "false" #if u want to protect boot partition.
 
+  FORCE_DISABLE_MODULE_SIG: "true" # Force disable CONFIG_MODULE_SIG after .config is generated.
   GENERATE_DTB: "false" # if u kernel need DTB , but cannot auto generate it. (Only Anykernel3).
   GENERATE_CHIP: "qcom" # only supported for qcom and mediatek.
 
